@@ -290,24 +290,32 @@ body::before{
     <span class="form-label">📧 Send me the free guide:</span>
 
     <!-- 2. OPT-IN FORM -->
-    <input type="text"  class="field" placeholder="Your First Name">
-    <input type="email" class="field" placeholder="Your Best Email Address">
-    <button class="submit">🎉 Send Me the Free Guide →</button>
+    <input type="text"  class="preview-field field" placeholder="Your First Name">
+    <input type="email" class="preview-field field" placeholder="Your Best Email Address">
+    <button class="preview-submit submit">🎉 Send Me the Free Guide →</button>
 
-    <!-- AWEBER FORM (loads on live site and replaces above inputs) -->
-    <div class="AW-Form-108632991" style="display:none;"></div>
-    <script type="text/javascript">(function(d, s, id) {
+    <!-- AWEBER FORM -->
+    <div class="AW-Form-108632991"></div>
+    <script type="text/javascript">
+    (function(){
+      var awDiv = document.querySelector('.AW-Form-108632991');
+      var observer = new MutationObserver(function(){
+        if(awDiv.querySelector('form,input')){
+          document.querySelectorAll('.preview-field,.preview-submit').forEach(function(el){
+            el.style.display='none';
+          });
+          observer.disconnect();
+        }
+      });
+      observer.observe(awDiv, {childList:true, subtree:true});
+    })();
+    (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
         js.src = "//forms.aweber.com/form/91/108632991.js";
-        js.onload = function(){
-          // Hide preview fields, show real AWeber form
-          document.querySelectorAll('.field,.submit').forEach(function(el){el.style.display='none';});
-          document.querySelector('.AW-Form-108632991').style.display='block';
-        };
         fjs.parentNode.insertBefore(js, fjs);
-        }(document, "script", "aweber-wjs-xeleav226"));
+        }(document, "script", "aweber-wjs-t5t35c0jf"));
     </script>
 
     <!-- 3. PRIVACY NOTE -->
